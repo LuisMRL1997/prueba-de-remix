@@ -8,8 +8,6 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-
-
 import "./tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -40,11 +38,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
             Inicio
           </Link>
           <Link
-            to="/create"
+            to="/post/create"
             className="text-lg font-bold text-blue-600 hover:underline"
             style={{ marginLeft: '20px' }}
           >
             Crear un Post
+          </Link>
+          <Link
+            to="/auth/github"
+            className="text-lg font-bold text-blue-600 hover:underline"
+            style={{ marginLeft: '20px' }}
+          >
+            Iniciar Sesión con GitHub
           </Link>
         </nav>
         {children}

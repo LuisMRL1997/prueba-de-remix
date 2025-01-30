@@ -18,7 +18,7 @@ export default function Index() {
       <h1>Welcome {data.displayName}</h1>
       <ul>
         <li>You have {data._json.followers} followers</li>
-        <li>You're following {data._json.following} people</li>
+        <li>You re following {data._json.following} people</li>
       </ul>
       <Form action="/logout" method="post">
         <button>Logout? Click me</button>

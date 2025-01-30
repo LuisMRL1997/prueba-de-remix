@@ -1,6 +1,9 @@
+// app/routes/_index.tsx
+
 import type { MetaFunction } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { db } from "./db.js";
+import { Link } from "@remix-run/react";
 
 // Define el tipo LoaderData
 type LoaderData = {
@@ -47,13 +50,28 @@ export default function Index() {
           </div>
         </header>
         <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
-          {posts.map(post =>(
-            <div key={post.id}>
-               <h2>{post.title}</h2>
-               <p>{post.content}</p>
-            </div>
-           
-          ) )}
+        {posts.map((post) => (
+  <div key={post.id} className="flex items-center justify-between w-full">
+    <h2>
+      <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">
+        {post.title}
+      </Link>
+    </h2>
+    <Form
+  method="post"
+  action={`/post/${post.id}/delete`}
+  onSubmit={(event) => {
+    if (!window.confirm("¿Estás seguro de que quieres eliminar este post?")) {
+      event.preventDefault();
+    }
+  }}
+>
+  <button type="submit" className="text-red-500 hover:text-red-700">
+    ❌
+  </button>
+</Form>
+  </div>
+))}
           <p className="leading-6 text-gray-700 dark:text-gray-200">
             What&apos;s next?
           </p>
@@ -85,7 +103,7 @@ export default function Index() {
 
 const resources = [
     {
-      href: "/create",
+      href: "post/create",
       text: "Crear un Post",
       icon: (
         <svg
